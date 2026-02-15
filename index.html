@@ -657,6 +657,7 @@
           <p class="small reveal-up delay3">
             If you're on your phone, I think the music needs another tap to start.
           </p>
+          <p class="play spotify on the side"></p>
         </div>
 
         <div class="stat reveal-up delay2">
@@ -1049,7 +1050,7 @@
 
   <!-- Background Music -->
   <audio id="bgm" loop preload="auto">
-    <source src="song.mp3" type="audio/mpeg" />
+    <source src="The Marías - Back To Me (Lyrics).mp3" type="audio/mpeg" />
   </audio>
 
   <script>
@@ -1109,21 +1110,24 @@
     let isPlaying = false;
 
     async function toggleMusic(){
-      try{
-        if(!isPlaying){
-          await bgm.play();
-          isPlaying = true;
-          musicBtn.textContent = "⏸ Pause song";
-        }else{
-          bgm.pause();
-          isPlaying = false;
-          musicBtn.textContent = "▶ Play Me!";
-        }
-      }catch(e){
-        musicBtn.textContent = "▶ Tap again to play";
+    try{
+      bgm.load();            // ensure it reloads the source
+      bgm.currentTime = 0;   // optional: start from beginning on first play
+      if(!isPlaying){
+        await bgm.play();
+        isPlaying = true;
+        musicBtn.textContent = "⏸ Pause song";
+      }else{
+        bgm.pause();
+        isPlaying = false;
+        musicBtn.textContent = "▶ Play Me!";
       }
+    }catch(e){
+      console.log(e);
+      musicBtn.textContent = "▶ Tap again to play";
     }
-    musicBtn.addEventListener('click', toggleMusic);
+  }
+
 
     // ----- mini envelope overlay -> then open letter modal -----
     const letterModal = document.getElementById('letterModal');
