@@ -1,4 +1,3 @@
-```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -657,7 +656,6 @@
           <p class="small reveal-up delay3">
             If you're on your phone, I think the music needs another tap to start.
           </p>
-          <p class="play spotify on the side"></p>
         </div>
 
         <div class="stat reveal-up delay2">
@@ -980,7 +978,7 @@
         </div>
 
       </div>
-      <div class="footer">And Beyond!</div>
+
       <div class="footer">Lovingly made by Abhinav.</div>
     </section>
   </div>
@@ -1049,10 +1047,9 @@
   </div>
 
   <!-- Background Music -->
-  <audio id="bgm" loop preload="auto" playsinline>
-    <source src="song.mp3?v=3" type="audio/mpeg" />
+  <audio id="bgm" loop preload="auto">
+    <source src="song.mp3" type="audio/mpeg" />
   </audio>
-
 
   <script>
     // ----- hearts -----
@@ -1109,20 +1106,9 @@
     const bgm = document.getElementById('bgm');
     const musicBtn = document.getElementById('musicBtn');
     let isPlaying = false;
-    let primed = false;
-    
+
     async function toggleMusic(){
       try{
-        // Prime once (helps Safari/iOS + some Chrome cases after navigation)
-        if(!primed){
-          bgm.muted = true;
-          await bgm.play();
-          bgm.pause();
-          bgm.currentTime = 0;
-          bgm.muted = false;
-          primed = true;
-        }
-    
         if(!isPlaying){
           await bgm.play();
           isPlaying = true;
@@ -1133,14 +1119,10 @@
           musicBtn.textContent = "▶ Play Me!";
         }
       }catch(e){
-        console.log("play failed:", e);
         musicBtn.textContent = "▶ Tap again to play";
-        alert("Audio blocked — tap once more");
       }
     }
     musicBtn.addEventListener('click', toggleMusic);
-
-
 
     // ----- mini envelope overlay -> then open letter modal -----
     const letterModal = document.getElementById('letterModal');
@@ -1246,4 +1228,3 @@
   </script>
 </body>
 </html>
-```
